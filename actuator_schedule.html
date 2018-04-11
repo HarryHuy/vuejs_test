@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Actuator Schedule</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-datepicker/1.8.0/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-timepicker/0.5.2/bootstrap-timepicker.min.css">
+</head>
+<body>
+	<div class="container">
+	<div id="actuators-schedule">
+		<form id="schedule-form">
+			<div class="form-group">
+				<label>Actuator</label>
+				<div class="row">
+					<div class="col-md-12">
+						<select name="actuator" class="form-control">
+							<option value="" selected>------</option>
+							<option value="1">Fan</option>
+							<option value="2">Pump</option>
+						</select>		
+					</div>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label>Starting date time</label>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="input-group date">
+							<input type="text" name="date-start-date" class="form-control" ref="dateStartDate">
+							<div class="input-group-addon">
+        						<span class="glyphicon glyphicon-th"></span>
+    						</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="input-group bootstrap-timepicker timepicker">
+						<input type='text' name='date-start-time' class="form-control">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>	
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label>Duration On</label>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group bootstrap-timepicker timepicker">
+						<input type="text" name="duration-on" class="form-control">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>	
+										
+						</div>
+						<p class="help-block">The duration (in hh:mm:ss form) in which the equipment is ON.</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Period</label>
+				<div class="row">
+					<div class="col-md-12">	
+						<input type="text" name="period" class="form-control">
+						<p class="help-block">The duration after which the ON/OFF sequence is repeated.</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>How many hours</label>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="number" name="num-hours" class="form-control" v-model="num_hours">						
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Ending date time</label>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="input-group date">
+							<input type="text" name="date-end-date" class="form-control">
+							<div class="input-group-addon">
+        						<span class="glyphicon glyphicon-th"></span>
+    						</div>						
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="input-group date">
+							<input type="text" name="date-end-time" class="form-control">	
+							<div class="input-group-addon">
+        						<span class="glyphicon glyphicon-th"></span>
+    						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label>Recurrence days</label>
+				<div class="row">
+					<div class="col-md-12">
+						<input type="number" name="recurrence-days" class="form-control" v-model="recurrence_days">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<button id="btn-save" class="btn btn-primary">Save</button>
+				<button id="btn-cancel" class="btn btn-default">Cancel</button>
+				<button id="btn-delete" class="btn btn-danger pull-right">Delete</button>	
+			</div>
+			
+		</form>
+	</div>
+	</div>
+	
+	<script type="text/javascript" src="vendor/jquery/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap-datepicker/1.8.0/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap-timepicker/0.5.2/bootstrap-timepicker.min.js"></script>
+	<script type="text/javascript" src="vendor/vuejs/vue.js"></script>
+	<script type="text/javascript">
+		var actuators_schedule = new Vue({
+			el: '#actuators-schedule',
+			mounted: function() {
+				$(this.$el).find('[name="date-start-date"]').datepicker();
+				$(this.$el).find('[name="date-start-time"]').timepicker();
+				$(this.$el).find('[name="duration-on"]').timepicker();
+				$(this.$el).find('[name="date-end-date"]').datepicker();
+				$(this.$el).find('[name="date-end-time"]').timepicker();
+			},
+			data: {
+				actuators: [
+					{id: 1, name: 'fan'},
+					{id: 2, name: 'pump'}
+				],
+				date_start: null,
+				duration_on: null,
+				period: null,
+				num_hours: 8,
+				date_end: null,
+				recurrence_days: 2
+			}
+		})
+	</script>
+</body>
+</html>

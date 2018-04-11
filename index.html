@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vuejs Test</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+	<div id="app">
+		<span>Mesage: {{ message }}</span>
+		<custom-item v-bind:data="com"></custom-item>
+	</div>
+	<script type="text/javascript">
+		Vue.component('custom-item', {
+			props: ['data'],
+			template: '<div><span>{{ data }}</span></div>'
+		});
+		var app = new Vue({
+			el: '#app',
+			data: {
+				message: 'Hello!',
+				com: 'Other text',
+			}
+		})
+	</script>
+</body>
+</html>
